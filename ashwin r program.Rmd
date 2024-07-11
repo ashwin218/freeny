@@ -1,0 +1,44 @@
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+str(freeny)
+head(freeny)
+summary(freeny)
+```
+
+```{r}
+missing_values <- sapply(freeny, function(x) sum(is.na(x)))
+print(missing_values)
+```
+
+```{r}
+# Visualize the data
+# Histogram for numerical variables
+num_vars <- sapply(freeny, is.numeric)
+num_data <- freeny[, num_vars]
+```
+
+```{r}
+# boxplot
+ggplot(freeny, aes(x =price.index, y =income.level)) +
+  geom_boxplot(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Boxplot of Humidity by Season", x= "price.index", y= "income.level")
+```
+
+```{r}
+# Scatter plot to show the relationship between two numeric variables (replace 'temp' and 'humidity' with appropriate column names)
+ggplot(freeny, aes(x = price.index, y = income.level)) +
+  geom_point(color = "red") +
+  theme_minimal() +
+  labs(title = "Scatter Plot of price index vs income level", x = "price.index", y = "income.level")
+```
+
+```{r}
+# Time series plot for a variable over time (replace 'date' and 'temp' with appropriate column names)
+ggplot(freeny, aes(x = price.index , y = income.level)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "freeny", x = "price.index", y = "income.level")
+```
